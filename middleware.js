@@ -1,5 +1,4 @@
 /**
- * INDUSTRY STANDARD MIDDLEWARE EXAMPLE
  * Scenario: A protected route to update user profile.
  */
 
@@ -50,8 +49,7 @@ const validateUpdate = (req, res, next) => {
 };
 
 // --- THE ACTUAL ROUTE ---
-// Notice how we "stack" the middleware. 
-// It goes: Auth -> Validation -> Final Logic.
+// Flow: Auth -> Validation -> Final Logic.
 app.put('/api/user/update', checkAuth, validateUpdate, (req, res) => {
     // If we reached here, it means the request is logged, authenticated, and validated!
     console.log("Updating database with:", req.body);
@@ -59,7 +57,7 @@ app.put('/api/user/update', checkAuth, validateUpdate, (req, res) => {
     res.json({ message: "Profile updated successfully!" });
 });
 
-// 5. ERROR HANDLING MIDDLEWARE (The Safety Net)
+// 5. ERROR HANDLING MIDDLEWARE 
 // This is unique: it has 4 arguments (err, req, res, next).
 // Express knows this is the "emergency exit".
 app.use((err, req, res, next) => {
